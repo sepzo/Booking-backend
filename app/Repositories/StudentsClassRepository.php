@@ -22,15 +22,4 @@ class StudentsClassRepository
         return StudentsClass::find($id);
     }
 
-    public function findByIdAndDate(int $id, string $date): ?StudentsClass
-    {
-        return StudentsClass::where('id', $id)
-            ->whereDate('start_time', $date)
-            ->first();
-    }
-
-    public function create(array $data): StudentsClass
-    {
-        return StudentsClass::create($data);
-    }
 }

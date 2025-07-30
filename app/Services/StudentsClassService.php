@@ -21,9 +21,4 @@ class StudentsClassService
     {
         return $this->classRepo->find($id);
     }
-
-    public function createClass(array $data)
-    {
-        return $this->classRepo->create($data);
-    }
 }

@@ -22,7 +22,7 @@ class BookClassRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'class_id.exists' => 'The selected class does not exist.',
+            'class_id.exists' => 'Class does not exist.',
             'booking_date.after_or_equal' => 'The booking date must be today or a future date.',
         ];
     }

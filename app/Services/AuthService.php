@@ -30,22 +30,5 @@ class AuthService
         $user->currentAccessToken()?->delete();
     }
 
-    public function register(array $data)
-    {
-        // Check if email already exists
-        if ($this->userRepo->findByEmail($data['email'])) {
-            throw new HttpException(409, 'Email already exists.');
-        }
-
-        $user = $this->userRepo->create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        $token = $user->createToken('API Token')->plainTextToken;
-
-        return [$token, $user];
-    }
 }
 

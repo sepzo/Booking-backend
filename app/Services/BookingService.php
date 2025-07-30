@@ -23,16 +23,15 @@ class BookingService
     // Book a class for the user if not already booked and if capacity allows.
     public function bookClassForUser(int $userId, int $classId, string $date)
     {
-        DB::transaction(function () use ($userId, $classId, $date) {
+        return DB::transaction(function () use ($userId, $classId, $date) {
                 // Set the lock timeout for this transaction
                 DB::statement('SET lock_timeout = \'5s\'');
 
                 // Class locked the row for update
-                $class = $this->classRepo->findByIdAndDate($classId, $date); 
+                $class = $this->classRepo->find($classId); 
                 if (!$class) {
-                    throw new \Exception('No Class exists for this date.', 404);
+                    throw new \Exception('Class not found.', 404);
                 }
-
                 
                 // Check if the user has already booked a class for the same date
                 if ($this->bookingRepo->existsForUserOnDate($userId, $date)) {
@@ -50,7 +49,6 @@ class BookingService
                     'class_id'     => $classId,
                     'booking_date' => $date,
                 ]); 
-
                 return $booking;
             }, 5);  // transaction timeout
     }

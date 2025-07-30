@@ -34,19 +34,4 @@ class StudentClassController extends Controller
         }
     }
 
-    public function store(StudentClassRequest $request): JsonResponse
-    {
-        try {
-            $class = $this->studentsClassService->createClass($request->validated());
-            return api_success($class, 'Class created successfully.', 201);
-        } catch (HttpException $e) {
-            return api_error($e->getMessage(), $e->getStatusCode());
-        } catch (\Exception $e) {
-            Log::error('StudentsClass create error', [
-                'error' => $e->getMessage(),
-                'input' => $request->all()
-            ]);
-            return api_error('Unexpected error while creating class.', 500);
-        }
-    }
 }
