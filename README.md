@@ -11,4 +11,4 @@ Implement these endpoints:
 GET /api/classes – list available classes
 POST /api/book – book a class (only 1 per day)
 GET /api/bookings – list user’s bookings
-Use token-based auth (Passport or Sanctum).
+Use token-based auth (Passport or Sanctum)!
